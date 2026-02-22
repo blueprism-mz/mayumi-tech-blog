@@ -1,17 +1,21 @@
 ---
 interface Props {
-	date: Date;
+  date: Date | string;
 }
 
 const { date } = Astro.props;
+
+// 安全化：undefined / 不正値でもビルドを落とさない
+const d = date ? new Date(date) : new Date();
+const isValid = !Number.isNaN(d.getTime());
+const safeDate = isValid ? d : new Date();
+
+// 表示用（必要なら）
+const formatted = new Intl.DateTimeFormat("ja-JP", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(safeDate);
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
-</time>
+<time datetime={safeDate.toISOString()}>{formatted}</time>
