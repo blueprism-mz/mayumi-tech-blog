@@ -1,38 +1,78 @@
 ---
-import Layout from "../layouts/BlogPost.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
-<Layout title="mayumi-tech">
-  <main style="max-width:760px;margin:60px auto;font-family:sans-serif;line-height:1.7">
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main { width: 960px; }
+      .wrap { width: 760px; max-width: calc(100% - 2em); margin: 3rem auto; padding: 0 1em; line-height: 1.8; }
+      h1 { line-height: 1.15; margin: 0 0 1rem 0; }
+      .lead { color: rgb(var(--gray-dark)); margin: 0 0 1.25rem 0; }
+      .chips { margin: 1rem 0 1.25rem 0; color: rgb(var(--gray)); }
+      .chips span { margin-right: .75rem; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      .card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 1rem; }
+      .card h2 { margin: 0 0 .5rem 0; font-size: 1.1rem; }
+      .card p { margin: 0; color: rgb(var(--gray-dark)); }
+      .actions { margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+      a.btn { display: inline-block; padding: .65rem .9rem; border-radius: 12px; border: 1px solid #e5e7eb; text-decoration: none; }
+      a.btn:hover { box-shadow: var(--box-shadow); }
+      @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
 
-    <h1>Curiosity-driven experiments in AI and architecture.</h1>
+  <body>
+    <Header />
+    <main>
+      <section class="wrap">
+        <h1>Public lab for curiosity-driven experiments.</h1>
+        <p class="lead">
+          新しい技術や未知の領域を試しながら、気づきと仮説を短く残す公開ラボです。
+          完成した結論より、思考の途中経過と検証ログを大切にします。
+        </p>
 
-    <p>
-      新しい技術や未知の領域を実験しながら、
-      気づきや仮説を記録するための個人的なラボです。
-    </p>
+        <div class="chips">
+          <span>#Cloud (AWS/Azure)</span>
+          <span>#AI</span>
+          <span>#Architecture</span>
+          <span>#Governance</span>
+        </div>
 
-    <p>
-      完成した答えではなく、  
-      思考と試行錯誤の過程そのものを共有します。
-    </p>
+        <div class="grid">
+          <div class="card">
+            <h2>Cloud notes</h2>
+            <p>Cloud を触って気づいたこと、勘所</p>
+          </div>
+          <div class="card">
+            <h2>AI experiments</h2>
+            <p>生成AI・エージェント・周辺設計を試して共有</p>
+          </div>
+          <div class="card">
+            <h2>Architecture & governance</h2>
+            <p>“動く”より“回る”を重視。統制は加速のための構造</p>
+          </div>
+          <div class="card">
+            <h2>Work notes</h2>
+            <p>企業での意思決定・進め方・学び方など、軽い観察ログ</p>
+          </div>
+        </div>
 
-    <h2>Focus</h2>
-    <ul>
-      <li>AI and emerging technologies</li>
-      <li>Architecture and governance</li>
-      <li>Future of enterprise work</li>
-    </ul>
+        <div class="actions">
+          <a class="btn" href="/blog">→ Read the notes</a>
+          <a class="btn" href="/about">→ About this lab</a>
+        </div>
 
-    <h2>Latest notes</h2>
-    <p>
-      <a href="/blog">→ View all posts</a>
-    </p>
-
-	<h2>Connect</h2>
-	<p>
-	  If you'd like to connect, please reach out via LinkedIn.
-	</p>
-
-  </main>
-</Layout>
+        <p style="margin-top: 1.75rem; color: rgb(var(--gray));">
+          Connect: LinkedIn（必要な場合のみ）
+        </p>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
