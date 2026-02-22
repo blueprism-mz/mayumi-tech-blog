@@ -8,7 +8,8 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, tldr } = Astro.props;
+
 ---
 
 <html lang="en">
@@ -76,8 +77,27 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						</div>
 						<h1>{title}</h1>
 						<hr />
+
+						{tldr ? (
+  						  <section style="margin: 1rem 0 1.25rem; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 12px;">
+    						<strong>Quick take</strong>
+    						<p style="margin: .5rem 0 0 0;">{tldr}</p>
+  						  </section>
+						) : null}
+
+						{tags?.length ? (
+						  <p style="margin: 0 0 1.25rem; font-size: .95rem; color: rgb(var(--gray));">
+						    {tags.map((t) => <span style="margin-right:.6rem;">#{t}</span>)}
+						  </p>
+					) : null}
+				
 					</div>
 					<slot />
+
+					<p style="margin-top: 2rem;">
+					  <a href="/blog">← Back to Blog</a>
+					</p>
+					
 				</div>
 			</article>
 		</main>
